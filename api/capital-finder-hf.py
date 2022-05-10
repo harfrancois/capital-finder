@@ -9,7 +9,7 @@ class handler(BaseHTTPRequestHandler):
         query_string_list = parse.parse_qsl(url_components.query)
         dic = dict(query_string_list)
 
-        # /api/capital-finder-hf?name=
+        # https://capital-finder-harvey.vercel.app/api/capital-finder-hf?name=chile
         if 'name' in dic:
             url = 'https://restcountries.com/v3.1/name/'
             req = requests.get(url + dic['name'])
@@ -20,7 +20,7 @@ class handler(BaseHTTPRequestHandler):
             # reply to request
             rep = f'The capital of {country} is {capital}.'
             message = str(rep)
-        # /api/capital-finder-hf?capital=
+        # https://capital-finder-harvey.vercel.app/api/capital-finder-hf?capital=Santiago
         elif 'capital' in dic:
             url = 'https://restcountries.com/v3.1/capital/'
             req = requests.get(url + dic['capital'])
