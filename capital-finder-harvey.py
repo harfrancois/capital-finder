@@ -13,13 +13,9 @@ class handler(BaseHTTPRequestHandler):
             url = "https://restcountries.com/v3.1/name/"
             r = requests.get(url + dic["name"])
             data = r.json()
-            # country = data.data.name[0]
-            # capital = data.data.capital[0]
-            res = []
-            for word_data in data:
-                definition = word_data["name"][0]["capital"][0]
-                res.append(definition)
-            # res = f'The capital of {country} is {capital}.'
+            country = data.name[0]
+            capital = data.capital[0]
+            res = f'The capital of {country} is {capital}.'
             message = str(res)
 
         else:
