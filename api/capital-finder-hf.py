@@ -4,27 +4,27 @@ import requests
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        s = self.path
-        url_components = parse.urlsplit(s)
+        path = self.path
+        url_components = parse.urlsplit(path)
         query_string_list = parse.parse_qsl(url_components.query)
         dic = dict(query_string_list)
 
-        # /api/capital?name=
+        # /api/capital-finder-hf?name=
         if 'name' in dic:
             url = 'https://restcountries.com/v3.1/name/'
-            r = requests.get(url + dic['name'])
-            data = r.json()
+            req = requests.get(url + dic['name'])
+            data = req.json()
             # target data we want
             country = str(data[0]['name']['common'])
             capital = str(data[0]['capital'][0])
             # reply to request
             rep = f'The capital of {country} is {capital}.'
             message = str(rep)
-        # /api/capital?capital=
+        # /api/capital-finder-hf?capital=
         elif 'capital' in dic:
             url = 'https://restcountries.com/v3.1/capital/'
-            request = requests.get(url + dic['capital'])
-            data = request.json()
+            req = requests.get(url + dic['capital'])
+            data = req.json()
             # target data we want.
             country = str(data[0]['name']['common'])
             capital = str(data[0]['capital'][0])
